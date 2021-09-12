@@ -184,78 +184,91 @@ def get_host_arch():
     except:
         return 'Unknown'
 
+# remove state_class attribute for sensors that you don't want Home Assistant to keep long term statistics for
+# find a way to make this configurable through settings.yaml
 sensors = {
           'temperature': 
                 {'name':'Temperature',
-                 'class': 'temperature',
+                 'device_class': 'temperature',
                  'unit': '°C',
                  'icon': 'thermometer',
                  'sensor_type': 'sensor',
+                 'state_class': 'measurement',
                  'function': get_temp},
           'clock_speed':
                 {'name':'Clock Speed',
                  'unit': 'MHz',
                  'sensor_type': 'sensor',
+                 'state_class': 'measurement',
                  'function': get_clock_speed},
           'disk_use':
                 {'name':'Disk Use',
                  'unit': '%',
                  'icon': 'micro-sd',
                  'sensor_type': 'sensor',
+                 'state_class': 'measurement',
                  'function': lambda: get_disk_usage('/')},
           'memory_use':
                 {'name':'Memory Use',
                  'unit': '%',
                  'icon': 'memory',
                  'sensor_type': 'sensor',
+                 'state_class': 'measurement',
                  'function': get_memory_usage},
           'cpu_usage':
                 {'name':'CPU Usage',
                  'unit': '%',
                  'icon': 'memory',
                  'sensor_type': 'sensor',
+                 'state_class': 'measurement',
                  'function': get_cpu_usage},
           'load_1m':
                 {'name': 'Load 1m',
                  'icon': 'cpu-64-bit',
                  'sensor_type': 'sensor',
+                 'state_class': 'measurement',
                  'function': lambda: get_load(0)},
           'load_5m':
                 {'name': 'Load 5m',
                  'icon': 'cpu-64-bit',
                  'sensor_type': 'sensor',
+                 'state_class': 'measurement',
                  'function': lambda: get_load(1)},
           'load_15m':
                 {'name': 'Load 15m',
                  'icon': 'cpu-64-bit',
                  'sensor_type': 'sensor',
+                 'state_class': 'measurement',
                  'function': lambda: get_load(2)},
           'net_tx':
                 {'name': 'Network Upload',
                  'unit': 'Kbps',
                  'icon': 'server-network',
                  'sensor_type': 'sensor',
+                 'state_class': 'measurement',
                  'function': lambda: get_net_data(0)},
           'net_rx':
                 {'name': 'Network Download',
                  'unit': 'Kbps',
                  'icon': 'server-network',
                  'sensor_type': 'sensor',
+                 'state_class': 'measurement',
                  'function': lambda: get_net_data(1)},
           'swap_usage':
                 {'name':'Swap Usage',
                  'unit': '%',
                  'icon': 'harddisk',
                  'sensor_type': 'sensor',
+                 'state_class': 'measurement',
                  'function': get_swap_usage},
           'power_status':
                 {'name': 'Under Voltage',
-                 'class': 'problem',
+                 'device_class': 'problem',
                  'sensor_type': 'binary_sensor',
                  'function': get_rpi_power_status},
           'last_boot':
                 {'name': 'Last Boot',
-                 'class': 'timestamp',
+                 'device_class': 'timestamp',
                  'icon': 'clock',
                  'sensor_type': 'sensor',
                  'function': get_last_boot},
@@ -281,7 +294,7 @@ sensors = {
                  'function': get_host_arch},
           'last_message':
                 {'name': 'Last Message',
-                 'class': 'timestamp',
+                 'device_class': 'timestamp',
                  'icon': 'clock-check',
                  'sensor_type': 'sensor',
                  'function': get_last_message},
@@ -291,15 +304,15 @@ sensors = {
                  'sensor_type': 'sensor',
                  'function': get_updates},
           'wifi_strength': 
-                {'class': 'signal_strength',
+                {'device_class': 'signal_strength',
                  'name':'Wifi Strength',
                  'unit': 'dBm',
                  'icon': 'wifi',
                  'sensor_type': 'sensor',
+                 'state_class': 'measurement',
                  'function': get_wifi_strength},
           'wifi_ssid': 
-                {'class': 'signal_strength',
-                 'name':'Wifi SSID',
+                {'name':'Wifi SSID',
                  'icon': 'wifi',
                  'sensor_type': 'sensor',
                  'function': get_wifi_ssid},
