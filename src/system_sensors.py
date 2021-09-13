@@ -69,10 +69,11 @@ def send_config_message(mqttClient):
         mqttClient.publish(
             topic=f'homeassistant/{attr["sensor_type"]}/{deviceName}/{sensor}/config',
             payload = (f'{{'
-                    + (f'"device_class":"{attr["class"]}",' if 'class' in attr else '')
+                    + (f'"device_class":"{attr["device_class"]}",' if 'device_class' in attr else '')
                     + f'"name":"{deviceNameDisplay} {attr["name"]}",'
                     + f'"state_topic":"system-sensors/sensor/{deviceName}/state",'
                     + (f'"unit_of_measurement":"{attr["unit"]}",' if 'unit' in attr else '')
+                    + (f'"state_class":"{attr["state_class"]}",' if 'state_class' in attr else '')
                     + f'"value_template":"{{{{value_json.{sensor}}}}}",'
                     + f'"unique_id":"{deviceName}_sensor_{sensor}",'
                     + f'"availability_topic":"system-sensors/sensor/{deviceName}/availability",'
