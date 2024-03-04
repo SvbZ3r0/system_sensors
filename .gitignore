@@ -4,6 +4,9 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# sensitive info
+src/settings.yaml
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
